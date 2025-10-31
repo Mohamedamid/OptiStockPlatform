@@ -1,19 +1,38 @@
 package com.optistockplatrorm.controller.authController;
 
+import com.optistockplatrorm.dto.*;
+import com.optistockplatrorm.entity.*;
+import com.optistockplatrorm.service.ClientService;
+import com.optistockplatrorm.service.UserService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestController
-@RequestMapping("/api/auth")
 public class AuthController {
 
-    @GetMapping("/login")
-    public ResponseEntity<String> login() {
-        return ResponseEntity.ok("Connexion réussie - Bienvenue dans votre espace OptiStock");
+    @Autowired
+    private ClientService clientService;
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/api/register")
+    public ResponseEntity<ClientResponseDTO> register(@Valid @RequestBody ClientRequestDTO dto) {
+        ClientResponseDTO createdClient = clientService.createClient(dto);
+        return ResponseEntity.ok(createdClient);
     }
 
-    @GetMapping("/register")
-    public ResponseEntity<String> register() {
-        return ResponseEntity.ok("Inscription réussie - Votre compte OptiStock a été créé");
+
+
+
+    @PostMapping("/api/login")
+    public ResponseEntity<UserResponseDTO> login(@Valid @RequestBody UserRequestDTO dto) {
+        UserResponseDTO userLoged = userService.findUserByEmailAndByPassword(dto);
+        return ResponseEntity.ok(userLoged);
     }
+
 }

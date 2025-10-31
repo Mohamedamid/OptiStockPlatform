@@ -1,34 +1,22 @@
 package com.optistockplatrorm.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.NotBlank;
+
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import java.util.UUID;
-
+@Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @SuperBuilder
-@Entity
-public class Client {
+@Table(name = "clients")
+public class Client extends User {
 
-    @Id
-    @GeneratedValue
-    private UUID id;
-
-    @NotBlank
-    @Size(max = 100)
-    private String name;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    @NotNull
-    private User user;
+    @NotBlank(message = "Phone is required")
+    @Column(name = "phone", nullable = false)
+    private String phone;
 
 }

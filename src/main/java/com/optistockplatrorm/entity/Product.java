@@ -1,36 +1,43 @@
 package com.optistockplatrorm.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Entity
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = "products")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
-    @NotBlank
+    @Column(unique = true, nullable = false)
     private String sku;
 
-    @NotBlank
+    @Column(nullable = false)
     private String name;
 
-    @NotBlank
     private String category;
 
-    @Positive
-    private BigDecimal avgPrice;
+    private Boolean active = true;
 
-    private boolean active;
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
 }
-
