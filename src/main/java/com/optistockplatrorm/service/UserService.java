@@ -20,10 +20,10 @@ public class UserService {
 
     public UserResponseDTO findUserByEmailAndByPassword(UserRequestDTO dto){
         User user = userRepository.findByEmail(dto.email())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("User not found for the provided email."));
 
         if (!PasswordUtil.verify(dto.password(), user.getPassword())) {
-            throw new RuntimeException("Invalid password");
+            throw new RuntimeException("Authentication failed: invalid password.");
         }
         return userMapper.toDto(user);
     }
