@@ -1,14 +1,11 @@
 package com.optistockplatrorm.dto;
 
-import com.optistockplatrorm.entity.Enums.Role;
-import com..validation.UniqueEmail;
+import com.optistockplatrorm.util.EmailNotTaken;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
-
-import static com.optistockplatrorm.entity.Enums.Role.CLIENT;
 
 @Builder
 public record ClientRequestDTO(
@@ -17,7 +14,7 @@ public record ClientRequestDTO(
 
         @NotBlank(message = "Email is required")
         @Email(message = "Email should be valid")
-        @UniqueEmail
+        @EmailNotTaken
         String email,
 
         @NotBlank(message = "Password is required")

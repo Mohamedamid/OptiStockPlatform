@@ -1,7 +1,6 @@
 package com.optistockplatrorm.controller.authController;
 
 import com.optistockplatrorm.dto.*;
-import com.optistockplatrorm.entity.*;
 import com.optistockplatrorm.service.ClientService;
 import com.optistockplatrorm.service.UserService;
 import jakarta.validation.Valid;
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestController
 public class AuthController {

@@ -1,13 +1,13 @@
 package com.optistockplatrorm.service;
 
+import com.optistockplatrorm.entity.User;
 import com.optistockplatrorm.dto.UserRequestDTO;
 import com.optistockplatrorm.dto.UserResponseDTO;
-import com.optistockplatrorm.entity.User;
 import com.optistockplatrorm.mapper.UserMapper;
-import com.optistockplatrorm.repository.UserRepository;
 import com.optistockplatrorm.util.PasswordUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.optistockplatrorm.repository.UserRepository;
 
 @Service
 public class UserService {
@@ -25,7 +25,6 @@ public class UserService {
         if (!PasswordUtil.verify(dto.password(), user.getPassword())) {
             throw new RuntimeException("Invalid password");
         }
-
         return userMapper.toDto(user);
     }
 }

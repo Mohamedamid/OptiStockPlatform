@@ -1,8 +1,8 @@
 package com.optistockplatrorm.repository;
 
-import org.springframework.data.repository.CrudRepository;
-import com.optistockplatrorm.entity.User;
 import java.util.Optional;
+import com.optistockplatrorm.entity.User;
+import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Long> {
 
